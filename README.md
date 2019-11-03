@@ -85,7 +85,7 @@ Baza danych operuje na encjach:<br>
     } ]
     </h6>
 
-<h4>Do połącenia ze zdalną bazą danych umieszczoną na koncie Heroku potrzebna jest <u>nazwa użytkownika</u> oraz <u>hasło</u>. W projekcie wykorzystano technologie:<br></h4>
+<h4>Do połącenia ze zdalną bazą danych umieszczoną na koncie Heroku potrzebna jest <u>nazwa użytkownika</u> oraz <u>hasło</u>. W projekcie wykorzystano technologie:</h4><br>
 <h6>
     -Spring Boot, <br>
     -Spring MVC<br>
@@ -94,7 +94,7 @@ Baza danych operuje na encjach:<br>
     -Gradle<br>
     -Database (PostgreSQL)<br>
     -Lombok<br>
-    -Git</h5><br>
+    -Git<br></h5>
     <h4>Warstwy aplikacji:<br></h4>
 <h6>
     -Web (MVC)<br>
