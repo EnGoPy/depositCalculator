@@ -3,6 +3,7 @@ package com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.service;
 
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.dao.entity.DepositEntity;
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.dao.repository.DepositRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,21 +11,22 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class DepositService {
 
     @Autowired
     private DepositRepository depositRepository;
 
 
-    public List<DepositEntity> listAll(){
+    public List<DepositEntity> listAll() {
         return depositRepository.findAll();
     }
 
-    public DepositEntity save(DepositEntity entity){
+    public DepositEntity save(DepositEntity entity) {
         return depositRepository.save(entity);
     }
 
-    public Optional<DepositEntity> get(Long id){
+    public Optional<DepositEntity> get(Long id) {
         return depositRepository.findById(id);
     }
 
