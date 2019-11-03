@@ -41,7 +41,6 @@ public class BusinessService {
     public List<DepositListReturnModel> list() {
         List<DepositEntity> list;
         list = depositService.listAll();
-        System.out.println(list.size());
         if (list.size() > 0) {
             List<DepositListReturnModel> depositReturnedModels = new ArrayList<>();
             for (DepositEntity entity : list) {
@@ -69,14 +68,12 @@ public class BusinessService {
             } else {
                 throw new FutureDateException();
             }
-
         }
         throw new DepositNotFoundException(depositId);
     }
 
     private CalculationEntity calculateByStrategy(DepositEntity deposit, CalculationModel calculationModel) throws FutureDateException {
         BigDecimal savings = new BigDecimal(0);
-        System.out.println(deposit);
         if (calculationModel.getCalculationType().equals("current")) {
             savings = calculationStrategy.currentDayCalculation(deposit, calculationModel);
         } else if (calculationModel.getCalculationType().equals("whole")) {
@@ -94,7 +91,6 @@ public class BusinessService {
         }
     }
 
-
     public Optional<DepositWithCalculationModel> getDepositWithCalculations(Long id) {
         Optional<DepositEntity> deposit = depositService.get(id);
         if (deposit.isPresent()) {
@@ -102,6 +98,5 @@ public class BusinessService {
             return Optional.of(mappedValue);
         }
         return Optional.empty();
-
     }
 }

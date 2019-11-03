@@ -13,34 +13,28 @@ import java.time.temporal.ChronoUnit;
 @Component
 public class DepositMapper {
 
-    public DepositModel fromEntityToModel(DepositEntity entity){
-            ModelMapper modelMapper = new ModelMapper();
-            return modelMapper.map(entity, DepositModel.class);
-    }
-
-    public DepositEntity fromModelToEntity(DepositModel model){
-            ModelMapper modelMapper = new ModelMapper();
+    public DepositEntity fromModelToEntity(DepositModel model) {
+        ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(model, DepositEntity.class);
     }
 
-    public DepositReturnedModel entityToReturned(DepositEntity depositEntity){
-            ModelMapper modelMapper = new ModelMapper();
-            DepositReturnedModel depositReturnedModel = modelMapper.map(depositEntity, DepositReturnedModel.class);
-            long depositDuration = ChronoUnit.DAYS.between(depositEntity.getEndDate(), depositEntity.getStartDate());
-            depositReturnedModel.setDepositDuration(depositDuration);
-            return depositReturnedModel;
+    public DepositReturnedModel entityToReturned(DepositEntity depositEntity) {
+        ModelMapper modelMapper = new ModelMapper();
+        DepositReturnedModel depositReturnedModel = modelMapper.map(depositEntity, DepositReturnedModel.class);
+        long depositDuration = ChronoUnit.DAYS.between(depositEntity.getStartDate(), depositEntity.getEndDate());
+        depositReturnedModel.setDepositDuration(depositDuration);
+        return depositReturnedModel;
     }
 
-    public DepositListReturnModel entityToReturnedAsList(DepositEntity depositEntity){
+    public DepositListReturnModel entityToReturnedAsList(DepositEntity depositEntity) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(depositEntity, DepositListReturnModel.class);
     }
 
-    public DepositWithCalculationModel entityToDepositWithList(DepositEntity depositEntity){
+    public DepositWithCalculationModel entityToDepositWithList(DepositEntity depositEntity) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(depositEntity, DepositWithCalculationModel.class);
     }
-
 
 
 }
