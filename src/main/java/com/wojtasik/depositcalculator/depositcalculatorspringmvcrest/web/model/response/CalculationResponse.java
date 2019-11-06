@@ -1,4 +1,4 @@
-package com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned;
+package com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CalculationReturnModel {
+public class CalculationResponse {
 
     private BigDecimal amount;
     private LocalDate calculationDate;

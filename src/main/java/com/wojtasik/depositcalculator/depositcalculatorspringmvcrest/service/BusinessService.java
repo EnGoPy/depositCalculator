@@ -9,10 +9,10 @@ import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.service.map
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.service.mapper.DepositMapper;
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.incoming.CalculationModel;
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.incoming.DepositModel;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.CalculationReturnModel;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.DepositListReturnModel;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.DepositReturnedModel;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.DepositWithCalculationModel;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.CalculationResponse;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.DepositResponse;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.DepositReturnedModel;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.DepositWithCalculationModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,17 +37,9 @@ public class BusinessService {
     @Autowired
     private CalculationStrategy calculationStrategy;
 
-    public List<DepositListReturnModel> list() {
-        List<DepositEntity> list;
-        list = depositService.listAll();
-        if (list.size() > 0) {
-            List<DepositListReturnModel> depositReturnedModels = new ArrayList<>();
-            for (DepositEntity entity : list) {
-                depositReturnedModels.add(depositMapper.entityToReturnedAsList(entity));
-            }
-            return depositReturnedModels;
-        }
-        return null;
+    public List<DepositResponse> list() {
+        List<DepositEntity> list = depositService.listAll();
+        return depositMapper.entityListToDepositResponse(list);
     }
 
     public DepositReturnedModel addDeposit(DepositModel depositModel) {
@@ -58,7 +49,7 @@ public class BusinessService {
     }
 
     @Transactional
-    public Optional<CalculationReturnModel> calculateProfit(Long depositId, CalculationModel calculationModel) {
+    public Optional<CalculationResponse> calculateProfit(Long depositId, CalculationModel calculationModel) {
         Optional<DepositEntity> depositModel = depositService.get(depositId);
         if (depositModel.isPresent()) {
             DepositEntity deposit = depositModel.get();
@@ -93,10 +84,8 @@ public class BusinessService {
 
     public Optional<DepositWithCalculationModel> getDepositWithCalculations(Long id) {
         Optional<DepositEntity> deposit = depositService.get(id);
-        if (deposit.isPresent()) {
-            DepositWithCalculationModel mappedValue = depositMapper.entityToDepositWithList(deposit.get());
-            return Optional.of(mappedValue);
-        }
-        return Optional.empty();
+        DepositWithCalculationModel mappedValue = depositMapper.entityToDepositWithList(deposit.get());
+        return Optional.ofNullable(mappedValue);
+
     }
 }
