@@ -1,14 +1,16 @@
 package com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.service.mapper;
 
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.dao.entity.DepositEntity;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.DepositWithCalculationModel;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.DepositListReturnModel;
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.incoming.DepositModel;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.DepositReturnedModel;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.DepositResponse;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.DepositReturnedModel;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.DepositWithCalculationModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class DepositMapper {
@@ -26,15 +28,24 @@ public class DepositMapper {
         return depositReturnedModel;
     }
 
-    public DepositListReturnModel entityToReturnedAsList(DepositEntity depositEntity) {
+    public DepositResponse entityToReturnedAsList(DepositEntity depositEntity) {
         ModelMapper modelMapper = new ModelMapper();
-        return modelMapper.map(depositEntity, DepositListReturnModel.class);
+        return modelMapper.map(depositEntity, DepositResponse.class);
     }
 
     public DepositWithCalculationModel entityToDepositWithList(DepositEntity depositEntity) {
         ModelMapper modelMapper = new ModelMapper();
         return modelMapper.map(depositEntity, DepositWithCalculationModel.class);
     }
+
+    public List<DepositResponse> entityListToDepositResponse(List<DepositEntity> depositEntities){
+        List<DepositResponse> depositResponses = new ArrayList<>();
+        for(DepositEntity entity : depositEntities){
+            depositResponses.add(entityToReturnedAsList(entity));
+        }
+        return depositResponses;
+    }
+
 
 
 }

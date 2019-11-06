@@ -1,7 +1,7 @@
 package com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.service.mapper;
 
 import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.dao.entity.CalculationEntity;
-import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned.CalculationReturnModel;
+import com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response.CalculationResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,7 +23,7 @@ class CalculationMapperTest {
     void givenValidCalculationEntity_whenMapped_thenValidCalculationReturnModel() {
         // given
         CalculationEntity calculationEntity = new CalculationEntity(new BigDecimal(100), LocalDate.of(2000, 1, 1), "whole", new BigDecimal(100));
-        CalculationReturnModel mappedModel;
+        CalculationResponse mappedModel;
         // when
         mappedModel = calculationMapper.fromEntityToReturnModel(calculationEntity);
         // then
@@ -34,7 +34,7 @@ class CalculationMapperTest {
     void givenNullCalculationEntity_whenMapped_thenNullCalculationReturnModel() {
         // given
         CalculationEntity calculationEntity = null;
-        CalculationReturnModel mappedModel;
+        CalculationResponse mappedModel;
         // when
         mappedModel = calculationMapper.fromEntityToReturnModel(calculationEntity);
         // then

@@ -20,9 +20,9 @@ public class CalculationStrategy {
             BigDecimal ownedMoney = data.getAmount();
             int monthsBetween = monthsBetween(deposit.getStartDate(), LocalDate.now());
             int capitalization = deposit.getCapitalization();
-            int capitalizationPeriods = monthsBetween / capitalization;
+            BigDecimal capitalizationPeriods = new BigDecimal(monthsBetween).divide(new BigDecimal(capitalization),3);
             double periodDepositRate = deposit.getDebitRate() * capitalization / 12;
-            for (int i = 1; i <= capitalizationPeriods; i++) {
+            for (int i = 1; i <= capitalizationPeriods.intValue(); i++) {
                 ownedMoney = ownedMoney.add(profitCounter(ownedMoney, periodDepositRate));
             }
             return ownedMoney;
@@ -33,9 +33,9 @@ public class CalculationStrategy {
         BigDecimal ownedMoney = data.getAmount();
         int monthsBetween = monthsBetween(deposit.getStartDate(), deposit.getEndDate());
         int capitalization = deposit.getCapitalization();
-        int capitalizationPeriods = monthsBetween / capitalization;
+        BigDecimal capitalizationPeriods = new BigDecimal(monthsBetween).divide(new BigDecimal(capitalization),3);
         double periodDepositRate = deposit.getDebitRate() * capitalization / 12;
-        for (int i = 1; i <= capitalizationPeriods; i++) {
+        for (int i = 1; i <= capitalizationPeriods.intValue(); i++) {
             ownedMoney = ownedMoney.add(profitCounter(ownedMoney, periodDepositRate));
         }
         return ownedMoney;
@@ -47,7 +47,7 @@ public class CalculationStrategy {
     }
 
     private BigDecimal profitCounter(BigDecimal basicAmount, double debitRate) {
-        BigDecimal percent = BigDecimal.valueOf(debitRate).divide(BigDecimal.valueOf(100));
+        BigDecimal percent = BigDecimal.valueOf(debitRate).divide(BigDecimal.valueOf(100),7);
         return basicAmount.multiply(percent).setScale(2, RoundingMode.HALF_UP);
     }
 

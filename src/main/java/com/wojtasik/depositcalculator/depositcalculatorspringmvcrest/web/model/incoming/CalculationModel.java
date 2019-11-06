@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 public class CalculationModel {
 
     @Min(0)
-    private BigDecimal amount;
+    private BigDecimal amount = BigDecimal.ZERO;
     private String calculationType;
 
 }

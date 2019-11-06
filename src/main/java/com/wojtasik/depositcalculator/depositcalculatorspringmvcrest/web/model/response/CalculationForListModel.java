@@ -1,4 +1,4 @@
-package com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.returned;
+package com.wojtasik.depositcalculator.depositcalculatorspringmvcrest.web.model.response;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

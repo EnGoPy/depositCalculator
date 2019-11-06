@@ -1,0 +1,136 @@
+{
+	"info": {
+		"_postman_id": "3ee97367-7234-43eb-8e03-63d47d1b70b2",
+		"name": "DepositCalc",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Deposit_adding",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"Deposit\",\n    \"debitRate\" : \"10\",\n   \"capitalization\" : \"3\",\n   \"startDate\" : \"2019-08-12\",\n   \"endDate\" : \"2020-08-12\"\n  }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/investments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"investments"
+					]
+				},
+				"description": "Post_deposit"
+			},
+			"response": []
+		},
+		{
+			"name": "Get_available_deposits",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \n    \"amount\" : \"2.1\",\n    \"calculationType\" : \"1\"\n\n  }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/investments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"investments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Perform_new_calculation",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\" : \"1500\",\n    \"calculationType\" : \"current\"\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/investments/4/calculations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"investments",
+						"4",
+						"calculations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Historical_calculations_of_specific_deposit",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/investments/4/calculations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"investments",
+						"4",
+						"calculations"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
