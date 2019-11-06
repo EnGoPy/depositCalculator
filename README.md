@@ -2,6 +2,8 @@
 
 Aplikacja restowa pozwalająca na przechowywanie poszczególnych lokat, zwracanie listy lokat, obliczenie stopnia oszczędności
 konkretnej lokaty dla bieżącej daty lub całego okresu trwania umowy, a także zwracanie historii obliczeń dla poszczególnej lokaty.<br>
+<h3>UWAGA:</h3>
+<p>W repozytorium znajduje się plik: "DepositCalc.postman_collection.json", w którym są wyeksportowane wywołania poszczególnych endpointów.</p>
 Baza danych operuje na encjach:<br>
 <h4>CalculationEntity</h4>
 <h6>- id              Long<br>
